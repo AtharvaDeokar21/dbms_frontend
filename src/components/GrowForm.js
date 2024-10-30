@@ -12,10 +12,10 @@ const GrowForm = () => {
   useEffect(() => {
     const fetchFarmersAndCrops = async () => {
       try {
-        const farmerResponse = await axios.get('http://localhost:8000/api/farmerprofileinfo/');
+        const farmerResponse = await axios.get('http://localhost:8000/api/farmers/');
         setFarmers(farmerResponse.data);
 
-        const cropResponse = await axios.get('http://localhost:8000/api/cropinfo/');
+        const cropResponse = await axios.get('http://localhost:8000/api/crops/');
         setCrops(cropResponse.data);
       } catch (error) {
         console.error("Failed to fetch farmers or crops", error);

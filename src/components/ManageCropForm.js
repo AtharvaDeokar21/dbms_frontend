@@ -12,10 +12,10 @@ const ManageCropForm = () => {
   useEffect(() => {
     const fetchPesticidesAndCrops = async () => {
       try {
-        const pesticideResponse = await axios.get('http://localhost:8000/api/fertilizer-pesticide-info/');
+        const pesticideResponse = await axios.get('http://localhost:8000/api/fertilizers/');
         setPesticides(pesticideResponse.data);
 
-        const cropResponse = await axios.get('http://localhost:8000/api/cropinfo/');
+        const cropResponse = await axios.get('http://localhost:8000/api/crops/');
         setCrops(cropResponse.data);
       } catch (error) {
         console.error("Failed to fetch pesticides or crops", error);

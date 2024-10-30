@@ -15,10 +15,10 @@ const SalesForm = () => {
   useEffect(() => {
     const fetchCropsAndFarmers = async () => {
       try {
-        const cropResponse = await axios.get('http://localhost:8000/api/cropinfo/');
+        const cropResponse = await axios.get('http://localhost:8000/api/crops/');
         setCrops(cropResponse.data);
 
-        const farmerResponse = await axios.get('http://localhost:8000/api/farmerprofileinfo/');
+        const farmerResponse = await axios.get('http://localhost:8000/api/farmers/');
         setFarmers(farmerResponse.data);
       } catch (error) {
         console.error("Failed to fetch crops or farmers", error);

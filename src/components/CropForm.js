@@ -16,7 +16,7 @@ const CropForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:8000/api/cropinfo/', formData);
+      await axios.post('http://localhost:8000/api/crops/', formData);
       alert("Crop record submitted!");
     } catch (error) {
       console.error("Error submitting crop record", error);

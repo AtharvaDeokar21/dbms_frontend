@@ -32,7 +32,7 @@ const ManageCropForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:8000/api/manage-crop/', formData);
+      await axios.post('http://localhost:8000/api/managecrop/', formData);
       alert("Manage crop record submitted!");
     } catch (error) {
       console.error("Error submitting manage crop record", error);

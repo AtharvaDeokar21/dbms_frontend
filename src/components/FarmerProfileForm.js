@@ -18,7 +18,7 @@ const FarmerProfileForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:8000/api/farmerprofileinfo/', formData);
+      await axios.post('http://localhost:8000/api/farmers/', formData);
       alert("Farmer Profile Submitted!");
     } catch (error) {
       console.error("Error submitting farmer profile", error);

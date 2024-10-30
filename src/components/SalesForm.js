@@ -35,7 +35,7 @@ const SalesForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:8000/api/sales/', formData);
+      await axios.post('http://localhost:8000/api/market-data/', formData);
       alert("Sale record submitted!");
     } catch (error) {
       console.error("Error submitting sale record", error);

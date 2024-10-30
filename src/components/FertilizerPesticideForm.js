@@ -22,7 +22,7 @@ const FertilizerPesticideForm = () => {
     e.preventDefault();
     console.log("Form Data Submitted: ", formData); // Log the form data to the console
     try {
-    //   await axios.post('http://localhost:8000/api/fertilizer-pesticide-info/', formData);
+      await axios.post('http://localhost:8000/api/fertilizers/', formData);
       alert("Fertilizer/Pesticide record submitted!");
       // Clear the form data after submission
       setFormData({

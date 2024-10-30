@@ -8,17 +8,21 @@ import { BrowserRouter as Router, Route, Switch, Routes, BrowserRouter } from 'r
 import FarmerProfileForm from './components/FarmerProfileForm';
 import SalesForm from './components/SalesForm';
 import CropForm from './components/CropForm';
+import Login from './components/Login';
+import Register from './components/Register';
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>  
           <Route path="/farmer" element={<FarmerProfileForm />} />
-          <Route path="/fertilizers-pesticides" element={<FertilizerPesticideForm />} />
+          <Route path="/fertilizers" element={<FertilizerPesticideForm />} />
           <Route path="/grows" element={<GrowForm />} />
-          <Route path="/manage-crops" element={<ManageCropForm />} />
+          <Route path="/managecrops" element={<ManageCropForm />} />
           <Route path="/sales" element={<SalesForm />} />
           <Route path="/crops" element={<CropForm />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
       </Routes>
     </BrowserRouter>
     

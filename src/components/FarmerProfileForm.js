@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-
+import Cookies from 'js-cookie';
+axios.defaults.withCredentials = true;
 const FarmerProfileForm = () => {
   const [formData, setFormData] = useState({
-    fname: '',
-    mname: '',
-    lname: '',
+    first_name: '',
+    middle_name: '',
+    last_name: '',
     location: '',
-    contact: '',
-    area: ''
+    phone_number: '',
+    land_area: ''
   });
 
   const handleChange = (e) => {
@@ -17,8 +18,24 @@ const FarmerProfileForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    
+    // Fetch the CSRF token
+    const csrftoken = Cookies.get('csrftoken');
+    console.log("CSRF Token:", csrftoken);
+    console.log("session id: ", Cookies.get('sessionid'));
+    console.log("Submitting Farmer Profile with data:", formData);
+    // if (!Cookies.get('sessionid')) {
+    //   alert("User not authenticated. Please log in.");
+    //   return;
+    // }
     try {
-      await axios.post('http://localhost:8000/api/farmers/', formData);
+      await axios.post('http://localhost:8000/api/farmers/', formData, {
+        headers: {
+          'X-CSRFToken': csrftoken,  // Add the CSRF token to the headers
+        },
+        withCredentials: true,  // This includes cookies with the request
+      });
       alert("Farmer Profile Submitted!");
     } catch (error) {
       console.error("Error submitting farmer profile", error);
@@ -33,7 +50,7 @@ const FarmerProfileForm = () => {
         First Name:
         <input 
           type="text" 
-          name="fname" 
+          name="first_name" 
           onChange={handleChange} 
           placeholder="First Name" 
           className="block w-full mt-1 p-2 border" 
@@ -44,7 +61,7 @@ const FarmerProfileForm = () => {
         Middle Name:
         <input 
           type="text" 
-          name="mname" 
+          name="middle_name" 
           onChange={handleChange} 
           placeholder="Middle Name" 
           className="block w-full mt-1 p-2 border" 
@@ -55,7 +72,7 @@ const FarmerProfileForm = () => {
         Last Name:
         <input 
           type="text" 
-          name="lname" 
+          name="last_name" 
           onChange={handleChange} 
           placeholder="Last Name" 
           className="block w-full mt-1 p-2 border" 
@@ -77,7 +94,7 @@ const FarmerProfileForm = () => {
         Contact:
         <input 
           type="number" 
-          name="contact" 
+          name="phone_number" 
           onChange={handleChange} 
           placeholder="Contact" 
           className="block w-full mt-1 p-2 border" 
@@ -88,7 +105,7 @@ const FarmerProfileForm = () => {
         Land Area:
         <input 
           type="number" 
-          name="area" 
+          name="land_area" 
           onChange={handleChange} 
           placeholder="Land Area" 
           className="block w-full mt-1 p-2 border" 

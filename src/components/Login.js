@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-
+import Cookies from 'js-cookie';
+axios.defaults.withCredentials = true
 const Login = () => {
   const [formData, setFormData] = useState({ username: '', password: '' });
 
@@ -12,14 +13,32 @@ const Login = () => {
     e.preventDefault();
     console.log("Logging in with:", formData); // For debugging purposes
     try {
-      const response = await axios.post('http://localhost:8000/api/login/', formData);
+      const response = await axios.post('http://localhost:8000/api/login/', formData, {
+        withCredentials: true, // Ensures cookies are handled
+      });
+      
       console.log("Login successful:", response.data);
-      // Handle successful login here (e.g., store token, redirect)
+      // Store CSRF token for future requests
+      const csrfToken = response.data.csrfToken;
+      if (csrfToken) {
+        Cookies.set('csrftoken', csrfToken); // Store CSRF token in cookies
+      }
+
+      // Handle additional success logic here, like redirecting
     } catch (error) {
       console.error("Login failed:", error);
       // Handle login error here (e.g., display error message)
     }
   };
+
+  // Axios interceptor to attach CSRF token to every request
+  axios.interceptors.request.use((config) => {
+    const csrftoken = Cookies.get('csrftoken');
+    if (csrftoken) {
+      config.headers['X-CSRFToken'] = csrftoken;
+    }
+    return config;
+  });
 
   return (
     <div className="flex justify-center items-center h-screen bg-gray-100">
